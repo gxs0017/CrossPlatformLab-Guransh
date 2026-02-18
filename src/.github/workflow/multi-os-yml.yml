@@ -1,0 +1,48 @@
+name: Multi-OS Testing - Guransh
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  test-ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Start Message
+        run: echo "Testing on Ubuntu..."
+
+      - name: Display OS Information
+        run: lsb_release -a || uname -a
+
+      - name: Create Test File
+        run: echo "Ubuntu test by Guransh" > test-ubuntu.txt
+
+      - name: Display File Contents
+        run: cat test-ubuntu.txt
+
+      - name: Print End Message
+        run: echo "Ubuntu tests completed"
+
+  test-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Print Start Message
+        run: echo "Testing on Windows..."
+
+      - name: Display OS Information
+        run: systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+
+      - name: Create Test File
+        run: echo "Windows test by Guransh" > test-windows.txt
+
+      - name: Display File Contents
+        run: type test-windows.txt
+
+      - name: Print End Message
+        run: echo "Windows tests completed"
